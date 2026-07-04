@@ -3,7 +3,7 @@ import json
 def list_task(data_list):
     print("\n---- Task Tracker List ----")    
     counter = 0
-    for key, value in data.items():
+    for key, value in data_list.items():
         counter += 1
         print(f"{counter}. " + key + " : " + value)
 
@@ -52,15 +52,20 @@ def update_task(data_list, choice):
             print("Invalid Input! Input a number.")
             continue
 
-        if value_task == 1:
-            value_task = "In Progress"
-        elif value_task == 2:
-            value_task = "Done"
+        if value_task not in [1,2,3]:
+            print("Invalid Input! Please input a number from the selection.")
+            continue
         else:
-            value_task = "Pending"
+            if value_task == 1:
+                value_task = "In Progress"
+            elif value_task == 2:
+                value_task = "Done"
+            else:
+                value_task = "Pending"
 
         data_list[selected_key] = value_task
         break
+    print(f"Task {selected_key} has been updated.")
 
     return data_list
 
@@ -166,4 +171,4 @@ while True:
 with open("task.json", "w") as json_file:
     json.dump(data, json_file, indent=4)
 
-print("Done")   
+print("Leaving... Thank you for tracking your task.")   
